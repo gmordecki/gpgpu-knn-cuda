@@ -32,6 +32,7 @@
 		gettimeofday(&t_i,NULL)
 
 	#define CLK_POSIX_STOP \
+    	cudaDeviceSynchronize(); \
 		gettimeofday(&t_f,NULL) 
 
 	#define CLK_POSIX_ELAPSED \
@@ -39,15 +40,7 @@
 			 	 ((double) t_i.tv_sec * 1000.0 + (double) t_i.tv_usec / 1000.0))
 
 
-
-unsigned long long int sum_matrix(const unsigned long long int *M, int width);
-void print_matrix(const unsigned long long int *M, int width);
-void clean_matrix(unsigned long long int *M, int width);
-void clean_float_matrix(float *M, int width, int height);
-void copy_float_matrix(float *M, float *N, int width, int height);
-void init_matrix(unsigned long long int *M, int width);
 void clockStart(cudaEvent_t start);
 void clockStop(cudaEvent_t stop);
 float clockElapsed(cudaEvent_t start, cudaEvent_t stop);
 void clockInit(cudaEvent_t *start, cudaEvent_t *stop);
-void  mult_matrix(unsigned long long int *M1,unsigned long long int *M2, int width, unsigned long long int *M3);
